@@ -1,6 +1,3 @@
-# Back-End
-The Trust Assembly back-end is responsible for taking a URL, returning a headline.
-
 # Architecture
 ```mermaid
 graph TD
@@ -11,10 +8,11 @@ graph TD
 ```
 
 # Coordinator
-Receives from the front-end some content plus a headline. It looks up
-in the Vector Store if there's already a headline for that content (eg
-has a high cosine similarity). If so, return it (this will dedup across many
-stories). If not, then generate one via LLM and put it into the Vector Store.
+Receives from the front-end some content plus a headline. It looks up in the
+Vector Store if there's already a headline for that content (eg has a high
+cosine similarity for the content). If so, return the headline that was
+already previously generated (this will dedup across many stories). If not,
+then generate one via LLM and put it into the Vector Store.
 
 # Vector Store
 Unless there are objections, try Postgres with vector extension.
