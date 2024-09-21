@@ -7,4 +7,4 @@ Please create feature branches for your work, then after discussion we can merge
 # Project Layout
 * back - Backend, Databases, LLMs, gateway
 * infra - Infrastructure
-* ui - UI/UX, FrontEnd
+* browser-extension - UI/UX, FrontEnd, Chrome + Safari Browser Extension
