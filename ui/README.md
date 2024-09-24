@@ -80,7 +80,6 @@ Back-end will return a better headline (and in the future annotations on the con
     * [ ] Implement caching to reduce network requests.
 * [ ] User Interface:
     * [ ] Add options or context menus for users to toggle between original and transformed headlines.
-    * [ ] add real icons to the `icons/` directory
     * [ ] Handle permissions and content security policies.
 * [ ] Cross-Browser Support:
     * [ ] Use WebExtension APIs for compatibility.
