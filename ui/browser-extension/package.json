@@ -1,0 +1,29 @@
+{
+  "name": "browser-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --quiet",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,html}'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "AGPL-3.0-or-later",
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.11.0",
+    "@types/chrome": "^0.0.271",
+    "@types/safari-extension": "^0.0.33",
+    "@typescript-eslint/eslint-plugin": "^8.6.0",
+    "@typescript-eslint/parser": "^8.6.0",
+    "eslint": "^9.11.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3",
+    "typescript": "5.5.4"
+  }
+}
