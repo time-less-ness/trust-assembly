@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch",
+    "build": "webpack",
+    "watch": "webpack --watch",
     "lint": "eslint 'src/**/*.{ts,tsx}' --quiet",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,html}'"
   },
@@ -24,6 +24,9 @@
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.9.0",
     "prettier": "^3.3.3",
-    "typescript": "5.5.4"
+    "ts-loader": "^9.5.1",
+    "typescript": "5.5.4",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
   }
 }
