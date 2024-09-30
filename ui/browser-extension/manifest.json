@@ -2,15 +2,16 @@
   "manifest_version": 3,
   "name": "Trust Assembly",
   "version": "0.1.0",
-  "description": "Alerts you of limbic hijacking via media headlines",
+  "description": "Alerts you of limbic hijacking via transformed media headlines",
   "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "host_permissions": ["https://trust-assembly.org/*"],
   "background": {
-    "service_worker": "dist/background.js"
+    "service_worker": "dist/src/background.js"
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["dist/contentScript.js"],
+      "matches": ["https://*/*"],
+      "js": ["dist/src/contentScript.js"],
       "run_at": "document_end"
     }
   ],
@@ -21,6 +22,5 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     }
-  },
-  "host_permissions": ["<all_urls>"]
+  }
 }

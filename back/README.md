@@ -1,13 +1,25 @@
+# Trust Assembly Headline API
+
+A Deno API for analyzing limbic-hacking headlines and replacing them with
+more trustworthy ones.
+
+This API uses Deno, Hono, Postgres, and LLMs
+
+## Getting Started
+
+```
+deno task start # this will start the server listening on 0.0.0.0:8000
+```
+
 # Architecture
 ```mermaid
 graph TD
-    A[FrontEnd] <-->|HTTP API Headline+Content| B[IPv4/6 Gateway]
-    B <--> C[Coordinator/Backend]
-    C <--> D[LLM]
-    C <--> E[Vector Store]
+    A[FrontEnd] <--> B[Backend API]
+    B <--> C[LLM]
+    B <--> D[Vector Store]
 ```
 
-# Coordinator
+# Backend API
 Receives from the front-end some content plus a headline. It looks up in the
 Vector Store if there's already a headline for that content (eg has a high
 cosine similarity for the content). If so, return the headline that was
