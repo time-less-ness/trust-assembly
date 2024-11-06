@@ -17,14 +17,41 @@ determined by the Trust Assembly back-end.
 ## Getting Started
 
 ```bash
-npm install
+#build trust assembly with extension.js
+cd ../trust-assembly/ui/browser-extension
+npm install extension --save-dev
+
+#set up certs firefox if you have it
+npx -y mkcert-cli --outDir node_modules\extension-develop\dist\certs --cert localhost.cert --key localhost.key
+
+
+
+#builds and runs chrome in debug mode
+npm run dev
+
+#builds and runs chrome and edge 
+npm run build
+
+#builds everything
 npm run build
 ```
 
-### Quick Test of the Chrome Extension
+### Quick Test of the Extension
+
+#### Load the Extension into Firefox
+
+1. open: about:debugging#/runtime/this-firefox
+2. Click: Load Temporary Add-on...
+3. Select the browser-extension directory.
+	* trust-assembly\ui\browser-extension\dist\firefox
+	* click on any file in the directory
+4. Verify Extension Installation
+    * The extension should now appear in your list with the name "Headline Stylistic Transformer".
+    * Ensure there are no errors during loading.
 
 #### Load the Extension into Chrome
-
+A. npm run dev
+B.
 1. Enable Developer Mode
     * Open Chrome.
     * Navigate to chrome://extensions/.

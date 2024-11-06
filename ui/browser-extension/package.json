@@ -4,12 +4,24 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "webpack",
+    "webpack": "webpack",
+    "build": "webpack & extension build --browser=all",
+    "dev": "webpack & extension dev --browser=chrome",
+    "start": "webpack & extension start --browser=chrome,edge",
     "watch": "webpack --watch",
     "lint": "eslint 'src/**/*.{ts,tsx}' --quiet",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,html}'"
   },
-  "keywords": [],
+  "background": {
+    "service_worker": "src/background.ts",
+    "scripts": ["src/background.ts"]
+ },
+  "keywords": [
+    "extension",
+    "browser-extension",
+    "web-extension",
+    "template"
+  ],
   "author": "",
   "license": "AGPL-3.0-or-later",
   "devDependencies": {
@@ -22,6 +34,7 @@
     "eslint": "^9.11.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "extension": "^2.0.0-beta.2",
     "globals": "^15.9.0",
     "prettier": "^3.3.3",
     "ts-loader": "^9.5.1",
