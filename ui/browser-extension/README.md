@@ -15,7 +15,7 @@ determined by the Trust Assembly back-end.
 * `manifest.json`: Defines the extension's configuration.
 
 ## Getting Started
-
+# you only need to run these commands once before building
 ```bash
 #build trust assembly with extension.js
 cd ../trust-assembly/ui/browser-extension
@@ -23,9 +23,11 @@ npm install extension --save-dev
 
 #set up certs firefox if you have it
 npx -y mkcert-cli --outDir node_modules\extension-develop\dist\certs --cert localhost.cert --key localhost.key
+#note: you may need to create the certs folder manually.
+#note: if the node_modules\extension-develop\dist folder isn't there already, run: 'npm run build' first.
 
 
-
+#run one of these commands every time you change the code
 #builds and runs chrome in debug mode
 npm run dev
 
