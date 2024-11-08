@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "ESNext",
+    "module": "CommonJS",
     "lib": ["DOM", "ES6"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "typeRoots": [ "node_modules/@types" ]
   },
   "include": ["src/**/*"]
 }
