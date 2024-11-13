@@ -1,8 +1,6 @@
 import { TrustAssemblyMessage } from './utils/messagePassing';
-import { getBackendUrlFromEnvironmentAndVersion } from './utils/constants';
-// TODO: make this dynamic based on which environment we're in, for now it's
-// hardcoded to only work locally
-import { CONFIG } from '../configs/config.local';
+import { getTransformation } from './api/backendApi';
+import { MessagePayload } from './models/MessagePayload';
 
 console.log(
   'Trust Assembly Headline Transformer background service worker loaded.',
@@ -20,40 +18,24 @@ console.log(
  */
 chrome.runtime.onMessage.addListener(
   async (
-    message: { action: TrustAssemblyMessage; originalText: string },
+    message: MessagePayload,
     _sender,
     sendResponse,
   ): Promise<boolean | undefined> => {
     if (message.action === TrustAssemblyMessage.FETCH_TRANSFORMED_HEADLINE) {
-      const originalText = message.originalText;
       console.log('inside of chrome.runtime.onMessage.addListener');
 
       // Make the API request to your backend
-      const url = `${getBackendUrlFromEnvironmentAndVersion(CONFIG.BACKEND_URL, CONFIG.API_VERSION)}/headline`;
-      console.log(`background script fetching URL: ${url}`);
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ headline: originalText }),
-      })
-        .then((response) => response.json())
-        .then((data: { transformedText: string }) => {
-          console.log(
-            `background::sendResponse: ${JSON.stringify(data, null, 2)}`,
-          );
-          sendResponse(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching transformed headline:', error);
-          sendResponse({ transformedText: null });
-        });
+      try {
+        const transformedArticle = await getTransformation(message.article);
+        sendResponse(transformedArticle);
+      } catch (error) {
+        console.error('Error fetching transformed headline:', error);
+        sendResponse({ transformedText: null });
+      }
 
       // Return true to indicate that sendResponse will be called asynchronously
       return true;
-    } else {
-      throw new Error(`Unknown message type: ${message.action}`);
     }
   },
 );
