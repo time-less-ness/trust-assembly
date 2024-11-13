@@ -6,8 +6,9 @@
   "permissions": ["storage", "activeTab", "scripting", "tabs"],
   "host_permissions": ["https://trust-assembly.org/*"],
   "background": {
-    "service_worker": "dist/src/background.js"
-  },
+    "service_worker": "src/background.ts",
+    "scripts": ["src/background.ts"]
+ },
   "content_scripts": [
     {
       "matches": ["https://*/*"],
