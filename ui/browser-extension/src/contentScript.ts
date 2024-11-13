@@ -1,3 +1,4 @@
+import { extractFromHtml } from '@extractus/article-extractor';
 import { dummyGetTransformation } from './api/dummyApi';
 import { Article } from './models/Article';
 import { MessagePayload } from './models/MessagePayload';
@@ -7,28 +8,32 @@ import { TrustAssemblyMessage } from './utils/messagePassing';
 
 console.log('Trust Assembly Headline Transformer content script loaded.');
 
-function findHeadlineElement() {
-  const selectors = [
-    'h1.main-headline',
-    'h1.article-title',
-    'h1.headline',
-    'h1.detailHeadline',
-    'h1[class*="headline"]', // Catch-all selector for any class containing the text "headline"
-  ];
-  console.log(
-    `Searching for headline element using these selectors: ${selectors.join(', ')}`,
+function getElementByXpath(xp: string) {
+  return document.evaluate(
+    xp,
+    document,
+    null,
+    XPathResult.FIRST_ORDERED_NODE_TYPE,
+    null,
+  ).singleNodeValue;
+}
+
+async function findHeadlineElement() {
+  const parsedArticle = await extractFromHtml(
+    document.documentElement.innerHTML,
   );
 
-  for (const selector of selectors) {
-    const element = document.querySelector<HTMLElement>(selector);
-    if (element) {
-      console.log('Found headline element:', element);
-
-      return element;
-    }
+  if (!parsedArticle) {
+    console.log('No article data received');
+    return;
   }
 
-  console.log('Headline element not found on this page.');
+  console.log('parsedArticle:', parsedArticle);
+  const headlineElement =
+    getElementByXpath(`//h1[contains(., "${parsedArticle.title}")]`) ??
+    undefined;
+
+  return headlineElement as HTMLElement | undefined;
 }
 
 const requestTransformedHeadline = async (
@@ -65,7 +70,7 @@ const requestTransformedHeadline = async (
 const stateManager = new ArticleStateManager(requestTransformedHeadline);
 
 (async function () {
-  const elementToModify = findHeadlineElement();
+  const elementToModify = await findHeadlineElement();
   if (!elementToModify) return;
 
   await stateManager.setElement(elementToModify);

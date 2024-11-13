@@ -1,5 +1,6 @@
 // webpack.config.js
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -15,6 +16,21 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: { ascii_only: true },
+        },
+      }),
+    ],
+    splitChunks: {
+      name: 'vendor',
+      chunks(chunk) {
+        return chunk.name !== 'background';
+      },
+    },
   },
   module: {
     rules: [
