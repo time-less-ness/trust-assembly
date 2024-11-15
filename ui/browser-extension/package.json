@@ -4,10 +4,9 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "webpack": "webpack",
     "build": "webpack & extension build --browser=all",
     "dev": "webpack & extension dev --browser=chrome",
-    "start": "webpack & extension start --browser=chrome,edge",
+    "start": "webpack & extension start --browser=all",
     "watch": "webpack --watch",
     "lint": "eslint 'src/**/*.{ts,tsx}' --quiet",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,html}'"

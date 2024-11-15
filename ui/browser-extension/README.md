@@ -15,24 +15,13 @@ determined by the Trust Assembly back-end.
 * `manifest.json`: Defines the extension's configuration.
 
 ## Getting Started
-# you only need to run these commands once before building
+
 ```bash
-#build trust assembly with extension.js
-cd ../trust-assembly/ui/browser-extension
-npm install extension --save-dev
+# you only need to run the install command once before building
+npm install
 
-#set up certs firefox if you have it
-npx -y mkcert-cli --outDir node_modules\extension-develop\dist\certs --cert localhost.cert --key localhost.key
-#note: you may need to create the certs folder manually.
-#note: if the node_modules\extension-develop\dist folder isn't there already, run: 'npm run build' first.
-
-
-#run one of these commands every time you change the code
 #builds and runs chrome in debug mode
 npm run dev
-
-#builds and runs chrome and edge 
-npm run build
 
 #builds everything
 npm run build
@@ -40,30 +29,34 @@ npm run build
 
 ### Quick Test of the Extension
 
-#### Load the Extension into Firefox
+#### Load the Extension into Chrome
+npm run dev
 
-1. open: about:debugging#/runtime/this-firefox
-2. Click: Load Temporary Add-on...
-3. Select the browser-extension directory.
+#### Load the Extension into IE
+npm run start
+
+#### Load the Extension into Firefox
+#firefox requires extra steps compared to chrome and edge
+
+#DO these steps once before building
+#set up certs firefox if you have it
+npx -y mkcert-cli --outDir node_modules\extension-develop\dist\certs --cert localhost.cert --key localhost.key
+#note: you may need to create the certs folder manually.
+#note: if the node_modules\extension-develop\dist folder isn't there already, run: 'npm run build' first.
+
+
+#to build and load the extension
+1.npm run build
+2. open: about:debugging#/runtime/this-firefox
+3. Click: Load Temporary Add-on...
+4. Select the browser-extension directory.
 	* trust-assembly\ui\browser-extension\dist\firefox
 	* click on any file in the directory
-4. Verify Extension Installation
+5. Verify Extension Installation
     * The extension should now appear in your list with the name "Headline Stylistic Transformer".
     * Ensure there are no errors during loading.
 
-#### Load the Extension into Chrome
-A. npm run dev
-B.
-1. Enable Developer Mode
-    * Open Chrome.
-    * Navigate to chrome://extensions/.
-    * Enable Developer mode using the toggle switch in the top right corner.
-2. Load Unpacked Extension
-    * Click Load unpacked.
-    * Select the browser-extension directory.
-3. Verify Extension Installation
-    * The extension should now appear in your list with the name "Headline Stylistic Transformer".
-    * Ensure there are no errors during loading.
+
 
 #### Test the Extension
 
